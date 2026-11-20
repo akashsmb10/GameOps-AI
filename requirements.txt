@@ -1,0 +1,27 @@
+# Core platform (tested with Python 3.11)
+numpy==2.2.6
+pandas==2.2.3
+pyarrow==26.0.1
+scikit-learn==1.6.1
+scipy==1.15.3
+duckdb==1.3.0
+faiss-cpu==1.11.0
+spacy==3.8.7
+en_core_web_md @ https://github.com/explosion/spacy-models/releases/download/en_core_web_md-3.8.0/en_core_web_md-3.8.0-py3-none-any.whl
+fastapi==0.165.0
+uvicorn==0.54.0
+pydantic==2.11.5
+httpx==0.28.1
+requests==2.34.2
+streamlit==1.67.0
+plotly==6.1.2
+langgraph==1.2.23
+langgraph-checkpoint==4.3.2
+langgraph-prebuilt==1.1.3
+langgraph-sdk==0.4.14
+langchain-core==1.8.3
+langchain-ollama==1.1.0
+joblib==1.5.1
+starlette==1.10.0  # pinned to a patched release (pip-audit)
+pillow==13.0.0  # pinned to a patched release (pip-audit)
+langsmith==0.15.0  # pinned to a patched release (pip-audit)

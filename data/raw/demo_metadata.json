@@ -1,0 +1,18 @@
+{
+  "data_source": "SYNTHETIC DEMO - fictional games, reviews and patch notes; not real player feedback",
+  "generator": "src/ingestion/demo_generator.py",
+  "seed": 7,
+  "requested_reviews": 12000,
+  "raw_rows": 12528,
+  "games": [
+    "Starfall Arena",
+    "Kingdoms of Ember",
+    "Turbo Circuit 26",
+    "Pitch Legends",
+    "Hollow Depths"
+  ],
+  "period": [
+    "2026-05-01",
+    "2026-10-31"
+  ]
+}

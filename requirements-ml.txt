@@ -1,0 +1,7 @@
+# Optional: Sentence-Transformers embeddings and the LoRA fine-tuning module (large download: PyTorch)
+-r requirements.txt
+torch==2.5.1
+transformers==4.46.3
+tokenizers==0.20.3
+peft==0.13.2
+sentence-transformers==3.3.1

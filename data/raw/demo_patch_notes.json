@@ -1,0 +1,91 @@
+[
+  {
+    "doc_id": "PATCH-G001-2.1",
+    "game_id": "G001",
+    "game_name": "Starfall Arena",
+    "version": "2.1",
+    "release_date": "2026-07-08",
+    "changes": [
+      "Migrated matchmaking to new regional data centres",
+      "Added ranked season 3",
+      "Reworked anti-cheat client"
+    ],
+    "data_source": "synthetic_demo"
+  },
+  {
+    "doc_id": "PATCH-G001-2.2",
+    "game_id": "G001",
+    "game_name": "Starfall Arena",
+    "version": "2.2",
+    "release_date": "2026-09-15",
+    "changes": [
+      "Rebalanced assault rifles and sniper damage",
+      "Fixed server desync on Harbor map"
+    ],
+    "data_source": "synthetic_demo"
+  },
+  {
+    "doc_id": "PATCH-G002-1.4",
+    "game_id": "G002",
+    "game_name": "Kingdoms of Ember",
+    "version": "1.4",
+    "release_date": "2026-06-20",
+    "changes": [
+      "Introduced the Ember Store with cosmetic bundles",
+      "Added premium battle pass",
+      "New questline: The Ash Crown"
+    ],
+    "data_source": "synthetic_demo"
+  },
+  {
+    "doc_id": "PATCH-G002-1.5",
+    "game_id": "G002",
+    "game_name": "Kingdoms of Ember",
+    "version": "1.5",
+    "release_date": "2026-09-01",
+    "changes": [
+      "New region: Frostmere",
+      "Save-system rewrite",
+      "Quest log redesign"
+    ],
+    "data_source": "synthetic_demo"
+  },
+  {
+    "doc_id": "PATCH-G003-3.0",
+    "game_id": "G003",
+    "game_name": "Turbo Circuit 26",
+    "version": "3.0",
+    "release_date": "2026-08-05",
+    "changes": [
+      "New graphics engine with ray-traced reflections",
+      "Added 6 tracks",
+      "Updated minimum PC requirements"
+    ],
+    "data_source": "synthetic_demo"
+  },
+  {
+    "doc_id": "PATCH-G004-26.2",
+    "game_id": "G004",
+    "game_name": "Pitch Legends",
+    "version": "26.2",
+    "release_date": "2026-07-25",
+    "changes": [
+      "Ultimate Squad packs refreshed",
+      "Player ratings update",
+      "Passing physics tuned"
+    ],
+    "data_source": "synthetic_demo"
+  },
+  {
+    "doc_id": "PATCH-G005-1.1",
+    "game_id": "G005",
+    "game_name": "Hollow Depths",
+    "version": "1.1",
+    "release_date": "2026-06-10",
+    "changes": [
+      "Added co-op mode",
+      "Fixed lighting in Chapter 2"
+    ],
+    "data_source": "synthetic_demo"
+  }
+]

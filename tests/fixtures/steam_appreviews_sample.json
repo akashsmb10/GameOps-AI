@@ -1,0 +1,42 @@
+{
+  "_comment": "HAND-WRITTEN TEST FIXTURE in the documented Steam appreviews response format. The review texts and ids are invented for testing; this is not real Steam data.",
+  "success": 1,
+  "query_summary": {"num_reviews": 2},
+  "cursor": "AoJ4fixturecursor",
+  "reviews": [
+    {
+      "recommendationid": "900000001",
+      "author": {"steamid": "76500000000000001", "num_games_owned": 10, "num_reviews": 2, "playtime_forever": 600, "playtime_at_review": 480, "last_played": 1767225600},
+      "language": "english",
+      "review": "Fixture text: crashes when loading the second level.",
+      "timestamp_created": 1767225600,
+      "timestamp_updated": 1767312000,
+      "voted_up": false,
+      "votes_up": 3,
+      "votes_funny": 0,
+      "weighted_vote_score": "0.52",
+      "comment_count": 0,
+      "steam_purchase": true,
+      "received_for_free": false,
+      "written_during_early_access": false,
+      "primarily_steam_deck": false
+    },
+    {
+      "recommendationid": "900000002",
+      "author": {"steamid": "76500000000000002", "num_games_owned": 50, "num_reviews": 9, "playtime_forever": 3000, "playtime_at_review": 2400, "last_played": 1767225600},
+      "language": "english",
+      "review": "Fixture text: great co-op fun on the Deck.",
+      "timestamp_created": 1767139200,
+      "timestamp_updated": 1767139200,
+      "voted_up": true,
+      "votes_up": 0,
+      "votes_funny": 1,
+      "weighted_vote_score": "0",
+      "comment_count": 0,
+      "steam_purchase": true,
+      "received_for_free": false,
+      "written_during_early_access": false,
+      "primarily_steam_deck": true
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  lint-security:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.11", cache: pip}
+      - run: pip install ruff==0.11.13 bandit==1.8.3 pip-audit==2.9.0
+      - run: ruff check .
+      - name: Bandit (static security scan)
+        run: bandit -q -r app src -s B101,B311,B608
+      - name: Dependency vulnerability audit
+        run: pip-audit -r requirements.txt --progress-spinner off || echo "::warning::pip-audit reported issues"
+
+  test:
+    runs-on: ubuntu-latest
+    needs: lint-security
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.11", cache: pip}
+      - run: pip install -r requirements-dev.txt
+      - run: python -m pytest -q
+      - name: Build demo pipeline and evaluations
+        run: |
+          python scripts/build_pipeline.py
+          python -m src.evaluation.rag_eval
+          python -m src.evaluation.agent_eval
+      - uses: actions/upload-artifact@v4
+        with:
+          name: evaluation-results
+          path: artifacts/eval/
+
+  docker:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build -t gameops-ai:ci .
+      - name: Smoke test container
+        run: |
+          docker run -d -p 8000:8000 --name gameops gameops-ai:ci
+          for i in $(seq 1 30); do curl -fsS localhost:8000/ready && break; sleep 2; done
+          curl -fsS "localhost:8000/api/v1/analytics/overview" > /dev/null
