@@ -6,8 +6,7 @@
 > → Negative reviews rose from **43.3% to 54.8%** (p = 0.0005). Server complaints jumped **10.7% → 32.6%**. Supporting reviews and the patch notes are cited.
 > The agent adds that timing alone **doesn't prove** the update caused it.
 
-🔗 **Live demo:** _link added after deployment_ (free hosting: the first visit may take ~1 minute to build)
-
+🔗 **Live demo: [gameops-ai.streamlit.app](https://gameops-ai.streamlit.app)**
 ![Executive overview](docs/screenshots/overview.png)
 
 ### What it does (in 4 lines)
