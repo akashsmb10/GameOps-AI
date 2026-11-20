@@ -1,4 +1,5 @@
 # GameOps AI — Agentic Player Feedback Intelligence Platform
+🔗 **Live demo: [gameops-ai.streamlit.app](https://gameops-ai.streamlit.app)**
 
 **Ask questions about player reviews in plain English and get answers backed by real numbers and quoted reviews.**
 
@@ -6,7 +7,6 @@
 > → Negative reviews rose from **43.3% to 54.8%** (p = 0.0005). Server complaints jumped **10.7% → 32.6%**. Supporting reviews and the patch notes are cited.
 > The agent adds that timing alone **doesn't prove** the update caused it.
 
-🔗 **Live demo: [gameops-ai.streamlit.app](https://gameops-ai.streamlit.app)**
 
 ![Executive overview](docs/screenshots/overview.png)
 
