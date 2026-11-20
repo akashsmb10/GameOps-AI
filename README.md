@@ -7,6 +7,7 @@
 > The agent adds that timing alone **doesn't prove** the update caused it.
 
 🔗 **Live demo: [gameops-ai.streamlit.app](https://gameops-ai.streamlit.app)**
+
 ![Executive overview](docs/screenshots/overview.png)
 
 ### What it does (in 4 lines)
