@@ -1,14 +1,37 @@
 # GameOps AI — Agentic Player Feedback Intelligence Platform
 
-GameOps AI turns game reviews into evidence a product team can act on. It does five things:
+**Ask questions about player reviews in plain English and get answers backed by real numbers and quoted reviews.**
 
-- **Cleans the reviews.** Every cleaning rule is counted in a data-quality report.
-- **Tags complaints.** Each review gets one or more complaint categories (bugs, performance, servers, monetization and others).
-- **Measures sentiment and trends.** Shares come with confidence intervals and significance tests.
-- **Retrieves evidence.** Hybrid FAISS + lexical retrieval returns cited reviews and update notes.
-- **Answers questions.** *GameOps Analyst* is a LangGraph agent that picks from five approved, read-only tools, checks every citation, and refuses to claim that an update *caused* a change.
+> *"Why did negative reviews for Starfall Arena increase after update 2.1?"*
+> → Negative reviews rose from **43.3% to 54.8%** (p = 0.0005). Server complaints jumped **10.7% → 32.6%**. Supporting reviews and the patch notes are cited.
+> The agent adds that timing alone **doesn't prove** the update caused it.
 
-> **Data notice.** The bundled dataset is **SYNTHETIC**: five fictional games, generated reviews and fictional patch notes, labelled as such everywhere. It is not real player feedback. A real-data connector for Steam's public review endpoint is included (`src/ingestion/steam.py`). It could not be run in the build environment because the network was blocked, so it is tested against a fixture. See [Dataset](#dataset).
+🔗 **Live demo:** _link added after deployment_ (free hosting: the first visit may take ~1 minute to build)
+
+![Executive overview](docs/screenshots/overview.png)
+
+### What it does (in 4 lines)
+1. **Cleans** thousands of game reviews and reports every problem it removed: duplicates, spam, broken dates, other languages.
+2. **Tags** each review with complaint types (bugs, servers, monetization…) and tracks sentiment over time, with confidence intervals.
+3. **Finds evidence** with hybrid search (FAISS vectors + keywords) and cites every review it uses.
+4. **Answers questions** through *GameOps Analyst*, a **LangGraph AI agent** that picks from 5 safe, read-only tools. It has been run locally with **Llama 3.2 (Ollama)**.
+
+### Headline results (measured, not hand-written)
+| | |
+|---|---|
+| Agent test cases | **45/45** passed (+ **8/10** on held-out questions) |
+| Search quality | **95.6%** of top-5 results relevant · **100%** valid citations |
+| Off-topic questions refused | **6/6** |
+| Automated tests | **66** passing · CI on GitHub Actions |
+
+### Tech stack
+Python · SQL (DuckDB) · scikit-learn · spaCy / Sentence-Transformers · FAISS · LangGraph · Ollama (Llama 3.2) · FastAPI · Streamlit + Plotly · PyTorch/PEFT (LoRA demo) · Docker · GitHub Actions
+
+> ⚠️ **Honest note:** the bundled data is **synthetic** (5 fictional games). A connector for real Steam reviews is included. All scores describe the demo data, not real players. Full details below.
+
+---
+
+## Full technical documentation
 
 | | |
 |---|---|
@@ -16,9 +39,7 @@ GameOps AI turns game reviews into evidence a product team can act on. It does f
 | Tests | **66 pytest tests passing** (2 fine-tuning tests skip without PyTorch); ruff + bandit clean; pip-audit: no known vulnerabilities |
 | Agent evaluation | **45/45** development cases; **8/10** held-out cases (run once, reported as-is); first real run with llama3.2:3b documented |
 | RAG evaluation | 30 questions: precision@5 **0.956**, citation correctness **1.0**, groundedness **0.944**, off-topic refused **6/6** |
-| Not done here | Systematic real-LLM evaluation (only a manual llama3.2:3b run so far); pretrained-model fine-tuning; Docker image build; cloud deployment |
-
-![Executive overview](docs/screenshots/overview.png)
+| Not done here | Systematic real-LLM evaluation (only a manual llama3.2:3b run so far); pretrained-model fine-tuning; Docker image build; cloud deployment of the API |
 
 ## Contents
 [Problem](#problem) · [Architecture](#architecture) · [Dataset](#dataset) · [NLP](#nlp-models) · [RAG](#rag) · [Agent](#the-agent-gameops-analyst) · [API](#api) · [Dashboard](#dashboard) · [Evaluation](#evaluation-results) · [Run it](#quick-start) · [Docker](#docker) · [Testing](#testing) · [Deployment](#deployment) · [Limitations](#limitations) · [Docs](#documentation)

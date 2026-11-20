@@ -111,10 +111,38 @@ def read_json(rel: str) -> dict | None:
     return json.loads(p.read_text()) if p.exists() else None
 
 
+@st.cache_resource(show_spinner=False)
+def _auto_build() -> str:
+    """Build the demo pipeline and evaluations once per server process.
+
+    Generated artifacts are git-ignored, so a fresh clone (e.g. a Streamlit Community Cloud deployment) starts
+    without them. The build runs in a SEPARATE Python process: it peaks at ~1.2 GB, and that memory is returned to
+    the system when it exits, so the long-running dashboard process stays small (free hosting has tight limits).
+    """
+    import subprocess
+    for script in ("build_pipeline.py", "run_evaluations.py"):
+        # fixed script names and the current interpreter only - no user input reaches this call
+        res = subprocess.run([sys.executable, str(ROOT / "scripts" / script)], cwd=ROOT, capture_output=True, text=True)  # noqa: S603
+        if res.returncode != 0:
+            raise RuntimeError(f"{script} failed: {res.stderr[-800:]}")
+    return "built"
+
+
 def ensure_built() -> bool:
-    if not (get_settings().artifacts_dir / "gameops.duckdb").exists():
-        st.error("The analytics database has not been built yet. Run `python scripts/build_pipeline.py` and reload.")
-        return False
+    if (get_settings().artifacts_dir / "gameops.duckdb").exists() and (get_settings().artifacts_dir / "eval" / "agent_eval.json").exists():
+        return True
+    with st.status("First start: generating the synthetic demo data, training models, building the search index and "
+                   "running evaluations (about 1-2 minutes, once per server)...", expanded=False) as status:
+        try:
+            _auto_build()
+        except Exception as exc:  # show a clear message instead of a stack trace
+            status.update(label="Automatic build failed", state="error")
+            st.error(f"Build failed: {type(exc).__name__}: {exc}. Run `python scripts/build_pipeline.py` locally.")
+            return False
+        status.update(label="Build complete", state="complete")
+    store.clear()
+    retriever.clear()
+    nlp_models.clear()
     return True
 
 
