@@ -76,7 +76,7 @@ class VectorIndex:
         if lexical is None:
             from sklearn.feature_extraction.text import TfidfVectorizer
             # token pattern keeps version numbers such as "2.1" as single tokens
-            vec = TfidfVectorizer(ngram_range=(1, 2), min_df=1, sublinear_tf=True, stop_words="english",
+            vec = TfidfVectorizer(ngram_range=(1, 2), min_df=1, sublinear_tf=True, stop_words="english",  # nosec B106 - token_pattern below is a regex, not a password
                                   token_pattern=r"(?u)\b\w+(?:\.\w+)*\b")  # noqa: S106 (regex, not a password)
             lexical = (vec, vec.fit_transform(self.meta["text"]))
         self.lex_vec, self.lex_X = lexical

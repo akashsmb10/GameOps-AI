@@ -53,11 +53,11 @@ def build_examples(max_train: int = 3000, max_eval: int = 300, seed: int = 0) ->
 def _tiny_model(texts: list[str], out_dir: Path):
     from tokenizers import Tokenizer, decoders, models, pre_tokenizers, trainers
     from transformers import GPT2Config, GPT2LMHeadModel, PreTrainedTokenizerFast
-    tok = Tokenizer(models.BPE(unk_token="<unk>"))
+    tok = Tokenizer(models.BPE(unk_token="<unk>"))  # nosec B106 - tokenizer special token, not a password
     tok.pre_tokenizer = pre_tokenizers.ByteLevel(add_prefix_space=False)
     tok.decoder = decoders.ByteLevel()  # without it, generated text keeps byte-level markers such as "Ġ"
     tok.train_from_iterator(texts, trainers.BpeTrainer(vocab_size=2000, special_tokens=["<unk>", "<pad>", "<eos>"]))
-    hf_tok = PreTrainedTokenizerFast(tokenizer_object=tok, unk_token="<unk>", pad_token="<pad>", eos_token="<eos>")
+    hf_tok = PreTrainedTokenizerFast(tokenizer_object=tok, unk_token="<unk>", pad_token="<pad>", eos_token="<eos>")  # nosec B106
     cfg = GPT2Config(vocab_size=hf_tok.vocab_size, n_positions=256, n_embd=128, n_layer=2, n_head=4,
                      bos_token_id=hf_tok.eos_token_id, eos_token_id=hf_tok.eos_token_id)
     hf_tok.save_pretrained(out_dir / "tokenizer")
